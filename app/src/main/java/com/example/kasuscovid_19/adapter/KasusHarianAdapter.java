@@ -13,6 +13,9 @@ import com.example.kasuscovid_19.R;
 import com.example.kasuscovid_19.model.kasus_harian.KasusHarianDataItem;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class KasusHarianAdapter extends RecyclerView.Adapter<KasusHarianAdapter.ViewHolder> {
 
@@ -32,6 +35,12 @@ public class KasusHarianAdapter extends RecyclerView.Adapter<KasusHarianAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Collections.sort(kasusHarianItem, new Comparator<KasusHarianDataItem>() {
+            @Override
+            public int compare(KasusHarianDataItem o1, KasusHarianDataItem o2) {
+                return o2.getTanggal().compareTo(o1.getTanggal());
+            }
+        });
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_kasusharian,parent,false);
         return new ViewHolder(view);
     }
